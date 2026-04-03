@@ -5,35 +5,77 @@ using UnityEngine.InputSystem;
  
 public class PlayerController2 : MonoBehaviour
 {
-    PlayerControls controls;
-    Vector2 move;
-    public float speed = 10.0f;
- 
+    public float maxAngle = 60f;
+    public float maxTorque = 60f;
+    public float maxSpeed = 15f;
+    
+    private float angle;
+    private float torque;
+    
+    private Rigidbody rb;
+    
+    public InputActionAsset primaryActions;
+    private InputActionMap playerActionMap;
+    private InputAction turningInputAction;
+    private InputAction movementInputAction;
+    
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        rb.linearDamping = 0.5f;
+        rb.angularDamping = 1f;
+    }
+    
     void Awake()
     {
-        controls = new PlayerControls();
-        controls.Player.Movement.performed += ctx => SendMessage(ctx.ReadValue<Vector2>());
-        controls.Player.Movement.performed += ctx => move = ctx.ReadValue<Vector2>();
-        controls.Player.Movement.canceled += ctx => move = Vector2.zero;
+        playerActionMap = primaryActions.FindActionMap("Player");
+        
+        movementInputAction = playerActionMap.FindAction("Movement");
+        turningInputAction = playerActionMap.FindAction("Turning");
+        
+        movementInputAction.performed += GetTorqueInput;
+        movementInputAction.canceled += GetTorqueInput;
+        
+        turningInputAction.performed += GetAngleInput;
+        turningInputAction.canceled += GetAngleInput;
     }
- 
+    
+    private void GetTorqueInput(InputAction.CallbackContext context)
+    {
+        torque = context.ReadValue<float>();
+        Debug.Log("Torque: " + torque);
+    }
+
+    private void GetAngleInput(InputAction.CallbackContext context)
+    {
+        angle = context.ReadValue<float>();
+    }
+    
     private void OnEnable()
     {
-        controls.Player.Enable();
+        turningInputAction.Enable();
+        movementInputAction.Enable();
     }
+    
     private void OnDisable()
     {
-        controls.Player.Disable();
+        turningInputAction.Disable();
+        movementInputAction.Disable();
     }
- 
-    void SendMessage(Vector2 coordinates)
-    {
-        Debug.Log("Thumb-stick coordinates = " + coordinates);
-    }
- 
+    
     void FixedUpdate()
     {
-        Vector3 movement = new Vector3(move.x, 0.0f, move.y) * (speed * Time.deltaTime);
-        transform.Translate(movement, Space.World);
+        Vector3 forward = rb.rotation * Vector3.forward;
+        forward.y = 0f;
+        forward.Normalize();
+
+        if (rb.linearVelocity.magnitude < maxSpeed)
+        {
+            rb.AddForce(forward * (torque * maxTorque), ForceMode.Acceleration);
+        }
+
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, angle * maxAngle * Time.fixedDeltaTime, 0f));
     }
 }

@@ -2,12 +2,13 @@
 
 public class FollowPlayer : MonoBehaviour
 {
-    public GameObject player;
-    private Vector3 offset = new(0, 7, -5);
+    public float smoothing = 6f;
+    public Transform lookAtTarget;
+    public Transform positionTarget;
     
     void LateUpdate()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        transform.position = player.transform.position + offset;
+        transform.position = Vector3.Lerp(transform.position, positionTarget.position, Time.deltaTime * smoothing);
+        transform.LookAt(lookAtTarget);
     }
 }

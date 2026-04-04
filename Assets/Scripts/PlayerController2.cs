@@ -5,10 +5,10 @@ using UnityEngine.InputSystem;
  
 public class PlayerController2 : MonoBehaviour
 {
-    public float maxAngle = 60f;
-    public float maxTorque = 60f;
-    public float maxSpeed = 15f;
-    public float turnSpeed = 2f;
+    private float maxAngle = 60f;
+    private float maxTorque = 600f;
+    private float maxSpeed = 50f;
+    private float turnSpeed = 2f;
     
     private float angle;
     private float torque;
@@ -70,12 +70,31 @@ public class PlayerController2 : MonoBehaviour
         Vector3 forward = rb.rotation * Vector3.forward;
         forward.y = 0f;
         forward.Normalize();
+        
+        Movement(forward);
+        Rotation(forward);
+    }
 
-        if (rb.linearVelocity.magnitude < maxSpeed)
-        {
-            rb.AddForce(forward * (torque * maxTorque), ForceMode.Acceleration);
-        }
+    private void Movement(Vector3 forward)
+    {
+        float speed = rb.linearVelocity.magnitude;
 
-        rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, angle * maxAngle * Time.fixedDeltaTime * turnSpeed, 0f));
+        float speedFactor = 1f - (speed / maxSpeed);
+        speedFactor = Mathf.Clamp01(speedFactor);
+
+        Vector3 currentSpeed = forward * (torque * maxTorque * speedFactor);
+        
+        rb.AddForce(currentSpeed, ForceMode.Acceleration);
+    }
+    
+    private void Rotation(Vector3 forward)
+    {
+        float forwardSpeed = Vector3.Dot(rb.linearVelocity, forward);
+        
+        float direction = 1f;
+        if (forwardSpeed == 0f) direction = 0f;
+        else if (forwardSpeed < -0.001f) direction = -1f;
+
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, angle * maxAngle * Time.fixedDeltaTime * turnSpeed * direction, 0f));
     }
 }

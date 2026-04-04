@@ -521,10 +521,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07086ae76fc30734c9e4683cd28f5c87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController2
-  maxAngle: 60
-  maxTorque: 60
-  maxSpeed: 15
-  turnSpeed: 3
   primaryActions: {fileID: -944628639613478452, guid: 3aa18a6e4c8b6c1428769d9a946a4248, type: 3}
 --- !u!1001 &553458857
 PrefabInstance:
@@ -548,7 +544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 905334768832445465, guid: 1e8a7f0ea6cb9f740a3ef85a278510d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 905334768832445465, guid: 1e8a7f0ea6cb9f740a3ef85a278510d5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -831,7 +827,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0, z: 0}
-  m_LocalScale: {x: 15, y: 1, z: 15}
+  m_LocalScale: {x: 100, y: 1, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

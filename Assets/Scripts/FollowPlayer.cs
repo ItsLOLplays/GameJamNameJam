@@ -6,7 +6,7 @@ public class FollowPlayer : MonoBehaviour
     public Transform lookAtTarget;
     public Transform positionTarget;
     
-    void LateUpdate()
+    void FixedUpdate()
     {
         transform.position = Vector3.Lerp(transform.position, positionTarget.position, Time.deltaTime * smoothing);
         transform.LookAt(lookAtTarget);

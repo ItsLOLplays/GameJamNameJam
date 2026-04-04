@@ -8,6 +8,7 @@ public class PlayerController2 : MonoBehaviour
     public float maxAngle = 60f;
     public float maxTorque = 60f;
     public float maxSpeed = 15f;
+    public float turnSpeed = 2f;
     
     private float angle;
     private float torque;
@@ -45,7 +46,6 @@ public class PlayerController2 : MonoBehaviour
     private void GetTorqueInput(InputAction.CallbackContext context)
     {
         torque = context.ReadValue<float>();
-        Debug.Log("Torque: " + torque);
     }
 
     private void GetAngleInput(InputAction.CallbackContext context)
@@ -76,6 +76,6 @@ public class PlayerController2 : MonoBehaviour
             rb.AddForce(forward * (torque * maxTorque), ForceMode.Acceleration);
         }
 
-        rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, angle * maxAngle * Time.fixedDeltaTime, 0f));
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, angle * maxAngle * Time.fixedDeltaTime * turnSpeed, 0f));
     }
 }

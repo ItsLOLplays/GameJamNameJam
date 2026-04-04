@@ -522,8 +522,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController2
   maxAngle: 60
-  maxTorque: 300
+  maxTorque: 60
   maxSpeed: 15
+  turnSpeed: 3
   primaryActions: {fileID: -944628639613478452, guid: 3aa18a6e4c8b6c1428769d9a946a4248, type: 3}
 --- !u!1001 &553458857
 PrefabInstance:

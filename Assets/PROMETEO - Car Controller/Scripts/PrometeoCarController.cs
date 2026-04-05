@@ -290,7 +290,7 @@ public class PrometeoCarController : MonoBehaviour
         if (isThrottlePressed)
         {
             CancelInvoke("DecelerateCar");
-            deceleratingCar = true;
+            deceleratingCar = false;
             GoForward();
         }
         
@@ -325,7 +325,7 @@ public class PrometeoCarController : MonoBehaviour
 
         if (!isThrottlePressed && !isReversePressed && !isHandbrakePressed && !deceleratingCar)
         {
-            InvokeRepeating("DecelerateCar", 0f, 0.1f);
+            InvokeRepeating(nameof(DecelerateCar), 0f, 0.1f);
             deceleratingCar = true;
         }
 

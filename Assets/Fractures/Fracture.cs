@@ -19,6 +19,14 @@ public class Fracture : MonoBehaviour
     private bool hasPlayedBreak;
     private bool hasPlayedDebris;
 
+    private void Start()
+    {
+        if (fractureObject != null)
+        {
+            fractureObject.SetActive(false);
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !hasExploded)
@@ -38,11 +46,10 @@ public class Fracture : MonoBehaviour
 
             if (fractureObject != null)
             {
-                Vector3 position = originalObject.transform.position;
-                position.x += 6.75f;
-                position.z -= 5.75f;
+                Vector3 position = fractureObject.transform.position;
                 
-                fractObject = Instantiate(fractureObject) as GameObject;
+                fractObject = Instantiate(fractureObject);
+                fractObject.SetActive(true);
                 fractObject.transform.position = position;
 
                 foreach (Transform t in fractObject.transform)

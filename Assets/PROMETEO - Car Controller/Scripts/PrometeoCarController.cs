@@ -58,12 +58,35 @@ public class PrometeoCarController : MonoBehaviour
     */
     public GameObject frontLeftMesh;
     public WheelCollider frontLeftCollider;
+    public GameObject frontLeftRig;
     [Space(10)] public GameObject frontRightMesh;
     public WheelCollider frontRightCollider;
+    public GameObject frontRightRig;
+
     [Space(10)] public GameObject rearLeftMesh;
     public WheelCollider rearLeftCollider;
+    public GameObject rearLeftRig;
+
     [Space(10)] public GameObject rearRightMesh;
     public WheelCollider rearRightCollider;
+    public GameObject rearRightRig;
+    
+    [Space(10)] public GameObject frontLeft2Mesh;
+    public WheelCollider frontLeft2Collider;
+    public GameObject frontLeft2Rig;
+    
+    [Space(10)] public GameObject frontRight2Mesh;
+    public WheelCollider frontRight2Collider;
+    public GameObject frontRight2Rig;
+
+    [Space(10)] public GameObject rearLeft2Mesh;
+    public WheelCollider rearLeft2Collider;
+    public GameObject rearLeft2Rig;
+
+    [Space(10)] public GameObject rearRight2Mesh;
+    public WheelCollider rearRight2Collider;
+    public GameObject rearRight2Rig;
+
 
     //PARTICLE SYSTEMS
 
@@ -76,14 +99,17 @@ public class PrometeoCarController : MonoBehaviour
     // The following particle systems are used as tire smoke when the car drifts.
     public ParticleSystem RLWParticleSystem;
     public ParticleSystem RRWParticleSystem;
+    
+    public ParticleSystem RLWParticleSystem2;
+    public ParticleSystem RRWParticleSystem2;
 
     [Space(10)]
     // The following trail renderers are used as tire skids when the car loses traction.
     public TrailRenderer RLWTireSkid;
-
     public TrailRenderer RRWTireSkid;
-
-    public Text carSpeedText; // Used to store the UI object that is going to show the speed of the car.
+    
+    public TrailRenderer RLWTireSkid2;
+    public TrailRenderer RRWTireSkid2;
 
     //SOUNDS
 
@@ -99,20 +125,6 @@ public class PrometeoCarController : MonoBehaviour
 
     float initialCarEngineSoundPitch; // Used to store the initial pitch of the car engine sound.
 
-    //CONTROLS
-
-    [Space(20)]
-    //[Header("CONTROLS")]
-    [Space(10)]
-    //The following variables lets you to set up touch controls for mobile devices.
-
-    public GameObject throttleButton;
-    public GameObject reverseButton;
-    public GameObject turnRightButton;
-    public GameObject turnLeftButton;
-    public GameObject handbrakeButton;
-
-    //CAR DATA
 
     [HideInInspector] public float carSpeed; // Used to store the speed of the car.
     [HideInInspector] public bool isDrifting; // Used to know whether the car is drifting or not.
@@ -151,6 +163,14 @@ public class PrometeoCarController : MonoBehaviour
     float RLWextremumSlip;
     WheelFrictionCurve RRwheelFriction;
     float RRWextremumSlip;
+    WheelFrictionCurve FLwheel2Friction;
+    float FLW2extremumSlip;
+    WheelFrictionCurve FRwheel2Friction;
+    float FRW2extremumSlip;
+    WheelFrictionCurve RLwheel2Friction;
+    float RLW2extremumSlip;
+    WheelFrictionCurve RRwheel2Friction;
+    float RRW2extremumSlip;
 
     void Awake()
     {
@@ -225,6 +245,35 @@ public class PrometeoCarController : MonoBehaviour
         RRwheelFriction.asymptoteSlip = rearRightCollider.sidewaysFriction.asymptoteSlip;
         RRwheelFriction.asymptoteValue = rearRightCollider.sidewaysFriction.asymptoteValue;
         RRwheelFriction.stiffness = rearRightCollider.sidewaysFriction.stiffness;
+        
+        FLwheel2Friction = new WheelFrictionCurve();
+        FLwheel2Friction.extremumSlip = frontLeft2Collider.sidewaysFriction.extremumSlip;
+        FLW2extremumSlip = frontLeft2Collider.sidewaysFriction.extremumSlip;
+        FLwheel2Friction.extremumValue = frontLeft2Collider.sidewaysFriction.extremumValue;
+        FLwheel2Friction.asymptoteSlip = frontLeft2Collider.sidewaysFriction.asymptoteSlip;
+        FLwheel2Friction.asymptoteValue = frontLeft2Collider.sidewaysFriction.asymptoteValue;
+        FLwheel2Friction.stiffness = frontLeft2Collider.sidewaysFriction.stiffness;
+        FRwheel2Friction = new WheelFrictionCurve();
+        FRwheel2Friction.extremumSlip = frontRight2Collider.sidewaysFriction.extremumSlip;
+        FRW2extremumSlip = frontRight2Collider.sidewaysFriction.extremumSlip;
+        FRwheel2Friction.extremumValue = frontRight2Collider.sidewaysFriction.extremumValue;
+        FRwheel2Friction.asymptoteSlip = frontRight2Collider.sidewaysFriction.asymptoteSlip;
+        FRwheel2Friction.asymptoteValue = frontRight2Collider.sidewaysFriction.asymptoteValue;
+        FRwheel2Friction.stiffness = frontRight2Collider.sidewaysFriction.stiffness;
+        RLwheel2Friction = new WheelFrictionCurve();
+        RLwheel2Friction.extremumSlip = rearLeft2Collider.sidewaysFriction.extremumSlip;
+        RLW2extremumSlip = rearLeft2Collider.sidewaysFriction.extremumSlip;
+        RLwheel2Friction.extremumValue = rearLeft2Collider.sidewaysFriction.extremumValue;
+        RLwheel2Friction.asymptoteSlip = rearLeft2Collider.sidewaysFriction.asymptoteSlip;
+        RLwheel2Friction.asymptoteValue = rearLeft2Collider.sidewaysFriction.asymptoteValue;
+        RLwheel2Friction.stiffness = rearLeft2Collider.sidewaysFriction.stiffness;
+        RRwheel2Friction = new WheelFrictionCurve();
+        RRwheel2Friction.extremumSlip = rearRight2Collider.sidewaysFriction.extremumSlip;
+        RRW2extremumSlip = rearRight2Collider.sidewaysFriction.extremumSlip;
+        RRwheel2Friction.extremumValue = rearRight2Collider.sidewaysFriction.extremumValue;
+        RRwheel2Friction.asymptoteSlip = rearRight2Collider.sidewaysFriction.asymptoteSlip;
+        RRwheel2Friction.asymptoteValue = rearRight2Collider.sidewaysFriction.asymptoteValue;
+        RRwheel2Friction.stiffness = rearRight2Collider.sidewaysFriction.stiffness;
 
         // We save the initial pitch of the car engine sound.
         if (carEngineSound != null)
@@ -234,7 +283,8 @@ public class PrometeoCarController : MonoBehaviour
 
         if (useSounds)
         {
-            InvokeRepeating("CarSounds", 0f, 0.1f);
+            carEngineSound.Play();
+            InvokeRepeating(nameof(CarSounds), 0f, 0.1f);
         }
         else if (!useSounds)
         {
@@ -289,14 +339,14 @@ public class PrometeoCarController : MonoBehaviour
 
         if (isThrottlePressed)
         {
-            CancelInvoke("DecelerateCar");
+            CancelInvoke(nameof(DecelerateCar));
             deceleratingCar = false;
             GoForward();
         }
         
         if (isReversePressed)
         {
-            CancelInvoke("DecelerateCar");
+            CancelInvoke(nameof(DecelerateCar));
             deceleratingCar = false;
             GoReverse();
         }
@@ -313,7 +363,7 @@ public class PrometeoCarController : MonoBehaviour
 
         if (isHandbrakePressed)
         {
-            CancelInvoke("DecelerateCar");
+            CancelInvoke(nameof(DecelerateCar));
             deceleratingCar = false;
             Handbrake();
         }
@@ -335,6 +385,10 @@ public class PrometeoCarController : MonoBehaviour
         }
 
         // We call the method AnimateWheelMeshes() in order to match the wheel collider movements with the 3D meshes of the wheels.
+    }
+
+    private void LateUpdate()
+    {
         AnimateWheelMeshes();
     }
 
@@ -469,6 +523,30 @@ public class PrometeoCarController : MonoBehaviour
             rearRightCollider.GetWorldPose(out RRWPosition, out RRWRotation);
             rearRightMesh.transform.position = RRWPosition;
             rearRightMesh.transform.rotation = RRWRotation;
+            
+            Quaternion FLWRotation2;
+            Vector3 FLWPosition2;
+            frontLeft2Collider.GetWorldPose(out FLWPosition2, out FLWRotation2);
+            frontLeft2Mesh.transform.position = FLWPosition2;
+            frontLeft2Mesh.transform.rotation = FLWRotation2;
+
+            Quaternion FRWRotation2;
+            Vector3 FRWPosition2;
+            frontRight2Collider.GetWorldPose(out FRWPosition2, out FRWRotation2);
+            frontRight2Mesh.transform.position = FRWPosition2;
+            frontRight2Mesh.transform.rotation = FRWRotation2;
+
+            Quaternion RLWRotation2;
+            Vector3 RLWPosition2;
+            rearLeft2Collider.GetWorldPose(out RLWPosition2, out RLWRotation2);
+            rearLeft2Mesh.transform.position = RLWPosition2;
+            rearLeft2Mesh.transform.rotation = RLWRotation2;
+
+            Quaternion RRWRotation2;
+            Vector3 RRWPosition2;
+            rearRight2Collider.GetWorldPose(out RRWPosition2, out RRWRotation2);
+            rearRight2Mesh.transform.position = RRWPosition2;
+            rearRight2Mesh.transform.rotation = RRWRotation2;
         }
         catch (Exception ex)
         {
@@ -497,7 +575,7 @@ public class PrometeoCarController : MonoBehaviour
         }
 
         // The following part sets the throttle power to 1 smoothly.
-        throttleAxis = throttleAxis + (Time.deltaTime * 3f);
+        throttleAxis += (Time.deltaTime * 3f);
         if (throttleAxis > 1f)
         {
             throttleAxis = 1f;
@@ -523,6 +601,15 @@ public class PrometeoCarController : MonoBehaviour
                 rearLeftCollider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
                 rearRightCollider.brakeTorque = 0;
                 rearRightCollider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+                
+                frontLeft2Collider.brakeTorque = 0;
+                frontLeft2Collider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+                frontRight2Collider.brakeTorque = 0;
+                frontRight2Collider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+                rearLeft2Collider.brakeTorque = 0;
+                rearLeft2Collider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+                rearRight2Collider.brakeTorque = 0;
+                rearRight2Collider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
             }
             else
             {
@@ -533,6 +620,11 @@ public class PrometeoCarController : MonoBehaviour
                 frontRightCollider.motorTorque = 0;
                 rearLeftCollider.motorTorque = 0;
                 rearRightCollider.motorTorque = 0;
+                
+                frontLeft2Collider.motorTorque = 0;
+                frontRight2Collider.motorTorque = 0;
+                rearLeft2Collider.motorTorque = 0;
+                rearRight2Collider.motorTorque = 0;
             }
         }
     }
@@ -580,6 +672,15 @@ public class PrometeoCarController : MonoBehaviour
                 rearLeftCollider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
                 rearRightCollider.brakeTorque = 0;
                 rearRightCollider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+                
+                frontLeft2Collider.brakeTorque = 0;
+                frontLeft2Collider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+                frontRight2Collider.brakeTorque = 0;
+                frontRight2Collider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+                rearLeft2Collider.brakeTorque = 0;
+                rearLeft2Collider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
+                rearRight2Collider.brakeTorque = 0;
+                rearRight2Collider.motorTorque = (accelerationMultiplier * 50f) * throttleAxis;
             }
             else
             {
@@ -590,6 +691,11 @@ public class PrometeoCarController : MonoBehaviour
                 frontRightCollider.motorTorque = 0;
                 rearLeftCollider.motorTorque = 0;
                 rearRightCollider.motorTorque = 0;
+                
+                frontLeft2Collider.motorTorque = 0;
+                frontRight2Collider.motorTorque = 0;
+                rearLeft2Collider.motorTorque = 0;
+                rearRight2Collider.motorTorque = 0;
             }
         }
     }
@@ -601,6 +707,11 @@ public class PrometeoCarController : MonoBehaviour
         frontRightCollider.motorTorque = 0;
         rearLeftCollider.motorTorque = 0;
         rearRightCollider.motorTorque = 0;
+                
+        frontLeft2Collider.motorTorque = 0;
+        frontRight2Collider.motorTorque = 0;
+        rearLeft2Collider.motorTorque = 0;
+        rearRight2Collider.motorTorque = 0;
     }
 
     // The following method decelerates the speed of the car according to the decelerationMultiplier variable, where
@@ -624,11 +735,11 @@ public class PrometeoCarController : MonoBehaviour
         {
             if (throttleAxis > 0f)
             {
-                throttleAxis = throttleAxis - (Time.deltaTime * 10f);
+                throttleAxis -= (Time.deltaTime * 10f);
             }
             else if (throttleAxis < 0f)
             {
-                throttleAxis = throttleAxis + (Time.deltaTime * 10f);
+                throttleAxis += (Time.deltaTime * 10f);
             }
 
             if (Mathf.Abs(throttleAxis) < 0.15f)
@@ -637,18 +748,23 @@ public class PrometeoCarController : MonoBehaviour
             }
         }
 
-        carRigidbody.linearVelocity = carRigidbody.linearVelocity * (1f / (1f + (0.025f * decelerationMultiplier)));
+        carRigidbody.linearVelocity *= (1f / (1f + (0.025f * decelerationMultiplier)));
         // Since we want to decelerate the car, we are going to remove the torque from the wheels of the car.
         frontLeftCollider.motorTorque = 0;
         frontRightCollider.motorTorque = 0;
         rearLeftCollider.motorTorque = 0;
         rearRightCollider.motorTorque = 0;
+                
+        frontLeft2Collider.motorTorque = 0;
+        frontRight2Collider.motorTorque = 0;
+        rearLeft2Collider.motorTorque = 0;
+        rearRight2Collider.motorTorque = 0;
         // If the magnitude of the car's velocity is less than 0.25f (very slow velocity), then stop the car completely and
         // also cancel the invoke of this method.
         if (carRigidbody.linearVelocity.magnitude < 0.25f)
         {
             carRigidbody.linearVelocity = Vector3.zero;
-            CancelInvoke("DecelerateCar");
+            CancelInvoke(nameof(DecelerateCar));
         }
     }
 
@@ -659,6 +775,11 @@ public class PrometeoCarController : MonoBehaviour
         frontRightCollider.brakeTorque = brakeForce;
         rearLeftCollider.brakeTorque = brakeForce;
         rearRightCollider.brakeTorque = brakeForce;
+        
+        frontLeft2Collider.brakeTorque = brakeForce;
+        frontRight2Collider.brakeTorque = brakeForce;
+        rearLeft2Collider.brakeTorque = brakeForce;
+        rearRight2Collider.brakeTorque = brakeForce;
     }
 
     // This function is used to make the car lose traction. By using this, the car will start drifting. The amount of traction lost
@@ -666,7 +787,7 @@ public class PrometeoCarController : MonoBehaviour
     // it is high, then you could make the car to feel like going on ice.
     public void Handbrake()
     {
-        CancelInvoke("RecoverTraction");
+        CancelInvoke(nameof(RecoverTraction));
         // We are going to start losing traction smoothly, there is were our 'driftingAxis' variable takes
         // place. This variable will start from 0 and will reach a top value of 1, which means that the maximum
         // drifting value has been reached. It will increase smoothly by using the variable Time.deltaTime.
@@ -710,6 +831,18 @@ public class PrometeoCarController : MonoBehaviour
 
             RRwheelFriction.extremumSlip = RRWextremumSlip * handbrakeDriftMultiplier * driftingAxis;
             rearRightCollider.sidewaysFriction = RRwheelFriction;
+            
+            FLwheel2Friction.extremumSlip = FLW2extremumSlip * handbrakeDriftMultiplier * driftingAxis;
+            frontLeft2Collider.sidewaysFriction = FLwheel2Friction;
+
+            FRwheel2Friction.extremumSlip = FRW2extremumSlip * handbrakeDriftMultiplier * driftingAxis;
+            frontRight2Collider.sidewaysFriction = FRwheel2Friction;
+
+            RLwheel2Friction.extremumSlip = RLW2extremumSlip * handbrakeDriftMultiplier * driftingAxis;
+            rearLeft2Collider.sidewaysFriction = RLwheel2Friction;
+
+            RRwheel2Friction.extremumSlip = RRW2extremumSlip * handbrakeDriftMultiplier * driftingAxis;
+            rearRight2Collider.sidewaysFriction = RRwheel2Friction;
         }
 
         // Whenever the player uses the handbrake, it means that the wheels are locked, so we set 'isTractionLocked = true'
@@ -730,11 +863,17 @@ public class PrometeoCarController : MonoBehaviour
                 {
                     RLWParticleSystem.Play();
                     RRWParticleSystem.Play();
+                    
+                    RLWParticleSystem2.Play();
+                    RRWParticleSystem2.Play();
                 }
                 else if (!isDrifting)
                 {
                     RLWParticleSystem.Stop();
                     RRWParticleSystem.Stop();
+                    
+                    RLWParticleSystem2.Stop();
+                    RRWParticleSystem2.Stop();
                 }
             }
             catch (Exception ex)
@@ -748,11 +887,17 @@ public class PrometeoCarController : MonoBehaviour
                 {
                     RLWTireSkid.emitting = true;
                     RRWTireSkid.emitting = true;
+                    
+                    RLWTireSkid2.emitting = true;
+                    RRWTireSkid2.emitting = true;
                 }
                 else
                 {
                     RLWTireSkid.emitting = false;
                     RRWTireSkid.emitting = false;
+                    
+                    RLWTireSkid2.emitting = false;
+                    RRWTireSkid2.emitting = false;
                 }
             }
             catch (Exception ex)
@@ -781,6 +926,26 @@ public class PrometeoCarController : MonoBehaviour
             {
                 RRWTireSkid.emitting = false;
             }
+            
+            if (RLWParticleSystem2 != null)
+            {
+                RLWParticleSystem2.Stop();
+            }
+
+            if (RRWParticleSystem2 != null)
+            {
+                RRWParticleSystem2.Stop();
+            }
+
+            if (RLWTireSkid2 != null)
+            {
+                RLWTireSkid2.emitting = false;
+            }
+
+            if (RRWTireSkid2 != null)
+            {
+                RRWTireSkid2.emitting = false;
+            }
         }
     }
 
@@ -788,7 +953,7 @@ public class PrometeoCarController : MonoBehaviour
     public void RecoverTraction()
     {
         isTractionLocked = false;
-        driftingAxis = driftingAxis - (Time.deltaTime / 1.5f);
+        driftingAxis -= (Time.deltaTime / 1.5f);
         if (driftingAxis < 0f)
         {
             driftingAxis = 0f;
@@ -811,7 +976,7 @@ public class PrometeoCarController : MonoBehaviour
             RRwheelFriction.extremumSlip = RRWextremumSlip * handbrakeDriftMultiplier * driftingAxis;
             rearRightCollider.sidewaysFriction = RRwheelFriction;
 
-            Invoke("RecoverTraction", Time.deltaTime);
+            Invoke(nameof(RecoverTraction), Time.deltaTime);
         }
         else if (FLwheelFriction.extremumSlip < FLWextremumSlip)
         {

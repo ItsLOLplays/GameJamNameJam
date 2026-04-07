@@ -97,6 +97,12 @@ public class PrometeoCarController : MonoBehaviour
     public bool useEffects = false;
 
     // The following particle systems are used as tire smoke when the car drifts.
+    public ParticleSystem FLWParticleSystem;
+    public ParticleSystem FRWParticleSystem;
+    
+    public ParticleSystem FLWParticleSystem2;
+    public ParticleSystem FRWParticleSystem2;
+    
     public ParticleSystem RLWParticleSystem;
     public ParticleSystem RRWParticleSystem;
     
@@ -105,6 +111,12 @@ public class PrometeoCarController : MonoBehaviour
 
     [Space(10)]
     // The following trail renderers are used as tire skids when the car loses traction.
+    public TrailRenderer FLWTireSkid;
+    public TrailRenderer FRWTireSkid;
+    
+    public TrailRenderer FLWTireSkid2;
+    public TrailRenderer FRWTireSkid2;
+    
     public TrailRenderer RLWTireSkid;
     public TrailRenderer RRWTireSkid;
     
@@ -379,12 +391,17 @@ public class PrometeoCarController : MonoBehaviour
             deceleratingCar = true;
         }
 
-        if (!isTurnLeftPressed && !isTurnRightPressed && steeringAxis != 0f)
+        if (!isTurnLeftPressed && !isTurnRightPressed && (steeringAxis != 0f || Mathf.Abs(frontLeftCollider.steerAngle) > 0.1f))
         {
             ResetSteeringAngle();
         }
 
-        // We call the method AnimateWheelMeshes() in order to match the wheel collider movements with the 3D meshes of the wheels.
+        if (!isTurnLeftPressed && !isTurnRightPressed && !isDrifting)
+        {
+            Vector3 angularVel = carRigidbody.angularVelocity;
+            angularVel.y = Mathf.Lerp(angularVel.y, 0f, Time.deltaTime * 5f);
+            carRigidbody.angularVelocity = angularVel;
+        }
     }
 
     private void LateUpdate()
@@ -447,7 +464,7 @@ public class PrometeoCarController : MonoBehaviour
     //The following method turns the front car wheels to the left. The speed of this movement will depend on the steeringSpeed variable.
     public void TurnLeft()
     {
-        steeringAxis = steeringAxis - (Time.deltaTime * 10f * steeringSpeed);
+        steeringAxis -= (Time.deltaTime * 10f * steeringSpeed);
         if (steeringAxis < -1f)
         {
             steeringAxis = -1f;
@@ -461,7 +478,7 @@ public class PrometeoCarController : MonoBehaviour
     //The following method turns the front car wheels to the right. The speed of this movement will depend on the steeringSpeed variable.
     public void TurnRight()
     {
-        steeringAxis = steeringAxis + (Time.deltaTime * 10f * steeringSpeed);
+        steeringAxis += (Time.deltaTime * 10f * steeringSpeed);
         if (steeringAxis > 1f)
         {
             steeringAxis = 1f;
@@ -478,16 +495,19 @@ public class PrometeoCarController : MonoBehaviour
     {
         if (steeringAxis < 0f)
         {
-            steeringAxis = steeringAxis + (Time.deltaTime * 10f * steeringSpeed);
+            steeringAxis += (Time.deltaTime * 10f * steeringSpeed);
         }
+        
         else if (steeringAxis > 0f)
         {
-            steeringAxis = steeringAxis - (Time.deltaTime * 10f * steeringSpeed);
+            steeringAxis -= (Time.deltaTime * 10f * steeringSpeed);
         }
 
         if (Mathf.Abs(frontLeftCollider.steerAngle) < 1f)
         {
             steeringAxis = 0f;
+            frontLeftCollider.steerAngle = 0f;
+            frontRightCollider.steerAngle = 0f;
         }
 
         var steeringAngle = steeringAxis * maxSteeringAngle;
@@ -866,6 +886,12 @@ public class PrometeoCarController : MonoBehaviour
                     
                     RLWParticleSystem2.Play();
                     RRWParticleSystem2.Play();
+                    
+                    FLWParticleSystem.Play();
+                    FRWParticleSystem.Play();
+                    
+                    FLWParticleSystem2.Play();
+                    FRWParticleSystem2.Play();
                 }
                 else if (!isDrifting)
                 {
@@ -874,6 +900,12 @@ public class PrometeoCarController : MonoBehaviour
                     
                     RLWParticleSystem2.Stop();
                     RRWParticleSystem2.Stop();
+                    
+                    FLWParticleSystem.Stop();
+                    FRWParticleSystem.Stop();
+                    
+                    FLWParticleSystem2.Stop();
+                    FRWParticleSystem2.Stop();
                 }
             }
             catch (Exception ex)
@@ -890,6 +922,12 @@ public class PrometeoCarController : MonoBehaviour
                     
                     RLWTireSkid2.emitting = true;
                     RRWTireSkid2.emitting = true;
+                    
+                    FLWTireSkid.emitting = true;
+                    FRWTireSkid.emitting = true;
+                    
+                    FLWTireSkid2.emitting = true;
+                    FRWTireSkid2.emitting = true;
                 }
                 else
                 {
@@ -898,6 +936,12 @@ public class PrometeoCarController : MonoBehaviour
                     
                     RLWTireSkid2.emitting = false;
                     RRWTireSkid2.emitting = false;
+                    
+                    FLWTireSkid.emitting = false;
+                    FRWTireSkid.emitting = false;
+                    
+                    FLWTireSkid2.emitting = false;
+                    FRWTireSkid2.emitting = false;
                 }
             }
             catch (Exception ex)

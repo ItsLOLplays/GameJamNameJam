@@ -49,6 +49,7 @@ public class Fracture : MonoBehaviour
                 Vector3 position = fractureObject.transform.position;
                 
                 fractObject = Instantiate(fractureObject);
+                fractureObject.SetActive(false);
                 fractObject.SetActive(true);
                 fractObject.transform.position = position;
 

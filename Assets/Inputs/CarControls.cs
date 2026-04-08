@@ -138,15 +138,6 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Fracture"",
-                    ""type"": ""Button"",
-                    ""id"": ""2e40b21d-a795-4c4f-901a-5975f2b1c944"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Reset"",
                     ""type"": ""Button"",
                     ""id"": ""cc1869a9-4958-4b55-8fbd-8d4ed8640235"",
@@ -214,19 +205,8 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""05d1b33c-4fc8-46a7-8385-11c27b725559"",
-                    ""path"": ""<Keyboard>/x"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Fracture"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""974081b0-751c-42e1-89eb-4cb191d119fc"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -246,7 +226,6 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
         m_Car_TurnLeft = m_Car.FindAction("TurnLeft", throwIfNotFound: true);
         m_Car_TurnRight = m_Car.FindAction("TurnRight", throwIfNotFound: true);
         m_Car_Handbrake = m_Car.FindAction("Handbrake", throwIfNotFound: true);
-        m_Car_Fracture = m_Car.FindAction("Fracture", throwIfNotFound: true);
         m_Car_Reset = m_Car.FindAction("Reset", throwIfNotFound: true);
     }
 
@@ -333,7 +312,6 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Car_TurnLeft;
     private readonly InputAction m_Car_TurnRight;
     private readonly InputAction m_Car_Handbrake;
-    private readonly InputAction m_Car_Fracture;
     private readonly InputAction m_Car_Reset;
     /// <summary>
     /// Provides access to input actions defined in input action map "Car".
@@ -366,10 +344,6 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Car/Handbrake".
         /// </summary>
         public InputAction @Handbrake => m_Wrapper.m_Car_Handbrake;
-        /// <summary>
-        /// Provides access to the underlying input action "Car/Fracture".
-        /// </summary>
-        public InputAction @Fracture => m_Wrapper.m_Car_Fracture;
         /// <summary>
         /// Provides access to the underlying input action "Car/Reset".
         /// </summary>
@@ -415,9 +389,6 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
             @Handbrake.started += instance.OnHandbrake;
             @Handbrake.performed += instance.OnHandbrake;
             @Handbrake.canceled += instance.OnHandbrake;
-            @Fracture.started += instance.OnFracture;
-            @Fracture.performed += instance.OnFracture;
-            @Fracture.canceled += instance.OnFracture;
             @Reset.started += instance.OnReset;
             @Reset.performed += instance.OnReset;
             @Reset.canceled += instance.OnReset;
@@ -447,9 +418,6 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
             @Handbrake.started -= instance.OnHandbrake;
             @Handbrake.performed -= instance.OnHandbrake;
             @Handbrake.canceled -= instance.OnHandbrake;
-            @Fracture.started -= instance.OnFracture;
-            @Fracture.performed -= instance.OnFracture;
-            @Fracture.canceled -= instance.OnFracture;
             @Reset.started -= instance.OnReset;
             @Reset.performed -= instance.OnReset;
             @Reset.canceled -= instance.OnReset;
@@ -528,13 +496,6 @@ public partial class @CarControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnHandbrake(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Fracture" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnFracture(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Reset" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

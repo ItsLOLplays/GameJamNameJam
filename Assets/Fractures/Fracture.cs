@@ -13,8 +13,8 @@ public class Fracture : MonoBehaviour
     public float fragScaleFactor = 1f;
     public AudioSource breakSound;
     public AudioSource debrisSound;
+    public CarController respawn;
 
-    private GameObject fractObject;
     private bool hasExploded;
     private bool hasPlayedBreak;
     private bool hasPlayedDebris;
@@ -33,6 +33,7 @@ public class Fracture : MonoBehaviour
         {
             Explode();
             hasExploded = true;
+            respawn.hasHitCheckpoint = true;
         }
     }
 
@@ -46,14 +47,9 @@ public class Fracture : MonoBehaviour
 
             if (fractureObject != null)
             {
-                Vector3 position = fractureObject.transform.position;
-                
-                fractObject = Instantiate(fractureObject);
-                fractureObject.SetActive(false);
-                fractObject.SetActive(true);
-                fractObject.transform.position = position;
+                fractureObject.SetActive(true);
 
-                foreach (Transform t in fractObject.transform)
+                foreach (Transform t in fractureObject.transform)
                 {
                     var rb = t.GetComponent<Rigidbody>();
                     
@@ -68,7 +64,7 @@ public class Fracture : MonoBehaviour
                 }
 
                 StopCoroutine(nameof(Shrink));
-                Destroy(fractObject, 15f);
+                Destroy(fractureObject, 15f);
             }
         }
     }

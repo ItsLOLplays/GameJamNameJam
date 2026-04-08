@@ -12,7 +12,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PrometeoCarController : MonoBehaviour
+public class CarController : MonoBehaviour
 {
     //CAR SETUP
 
@@ -123,6 +123,10 @@ public class PrometeoCarController : MonoBehaviour
     public TrailRenderer RLWTireSkid2;
     public TrailRenderer RRWTireSkid2;
 
+    public GameObject player;
+    public GameObject start;
+    public GameObject checkpoint;
+
     //SOUNDS
 
     [Space(20)]
@@ -161,6 +165,7 @@ public class PrometeoCarController : MonoBehaviour
     private bool isTurnRightPressed;
     private bool isTurnLeftPressed;
     private bool isHandbrakePressed;
+    public bool hasHitCheckpoint;
     
     /*
     The following variables are used to store information about sideways friction of the wheels (such as
@@ -401,6 +406,41 @@ public class PrometeoCarController : MonoBehaviour
             Vector3 angularVel = carRigidbody.angularVelocity;
             angularVel.y = Mathf.Lerp(angularVel.y, 0f, Time.deltaTime * 5f);
             carRigidbody.angularVelocity = angularVel;
+        }
+        
+        if (carControls.Car.Reset.triggered)
+        {
+            if (hasHitCheckpoint)
+            {
+                player.transform.position = checkpoint.transform.position;
+                player.transform.rotation = checkpoint.transform.rotation;
+            }
+            else
+            {
+                player.transform.position = start.transform.position;
+                player.transform.rotation = start.transform.rotation;
+            }
+            carRigidbody.linearVelocity = Vector3.zero;
+            carRigidbody.angularVelocity = Vector3.zero;
+    
+            frontLeftCollider.rotationSpeed = 0f;
+            frontRightCollider.rotationSpeed = 0f;
+            rearLeftCollider.rotationSpeed = 0f;
+            rearRightCollider.rotationSpeed = 0f;
+            frontLeft2Collider.rotationSpeed = 0f;
+            frontRight2Collider.rotationSpeed = 0f;
+            rearLeft2Collider.rotationSpeed = 0f;
+            rearRight2Collider.rotationSpeed = 0f;
+            
+            frontLeftCollider.motorTorque = 0;
+            frontRightCollider.motorTorque = 0;
+            rearLeftCollider.motorTorque = 0;
+            rearRightCollider.motorTorque = 0;
+                
+            frontLeft2Collider.motorTorque = 0;
+            frontRight2Collider.motorTorque = 0;
+            rearLeft2Collider.motorTorque = 0;
+            rearRight2Collider.motorTorque = 0;
         }
     }
 

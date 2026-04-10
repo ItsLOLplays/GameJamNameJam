@@ -31,16 +31,16 @@ public class Fracture : MonoBehaviour
     {
         if (other.CompareTag("Player") && !hasExploded)
         {
-            Explode();
-            hasExploded = true;
             respawn.hasHitCheckpoint = true;
         }
     }
 
-    void Explode()
+    public void Explode()
     {
-        if (originalObject != null && hasExploded == false)
+        if (originalObject != null && !hasExploded)
         {
+            hasExploded = true;
+            
             originalObject.SetActive(false);
             breakSound.Play();
             debrisSound.PlayDelayed(breakSound.clip.length / 2f);

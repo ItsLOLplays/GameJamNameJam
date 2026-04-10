@@ -20,19 +20,32 @@ public class PowerupController : MonoBehaviour
 
             other.GetComponent<Collider>().enabled = false;
             Destroy(other.gameObject); 
-            
-            Debug.Log("Powerup picked up");
+        }
+    }
+    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Building"))
+        {
+            Fracture fracture = collision.gameObject.GetComponent<Fracture>();
+
+            if (hasPowerup)
+            {
+                if (fracture != null)
+                {
+                    fracture.Explode();
+                }
+            }
+            else
+            {
+                // Loss();
+            }
         }
     }
 
-    // TODO: On collision with building and hasPowerup => building breaks
-    // else car breaks + player loses
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Building") && hasPowerup) { }
-        else { }
-    }
-
+    // TODO: player loses => Loss screen
+    // void Loss() { }
+    
     IEnumerator PowerupCountdownRoutine()
     {
         yield return new WaitForSeconds(5);

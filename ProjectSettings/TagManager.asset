@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Powerup
   - Building
+  - DeathPlane
   layers:
   - Default
   - TransparentFX

@@ -21,27 +21,60 @@ public class PowerupController : MonoBehaviour
             other.GetComponent<Collider>().enabled = false;
             Destroy(other.gameObject); 
         }
-    }
-    
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Building"))
+        
+        Debug.Log("Hit: " + other.gameObject.name);
+
+        if (other.gameObject.CompareTag("Building"))
         {
-            Fracture fracture = collision.gameObject.GetComponent<Fracture>();
+            Debug.Log("Hit building!");
+
+            Fracture fracture = other.gameObject.GetComponent<Fracture>();
 
             if (hasPowerup)
             {
+                Debug.Log("Has powerup!");
+
                 if (fracture != null)
                 {
+                    Debug.Log("Exploding!");
                     fracture.Explode();
                 }
             }
             else
             {
+                Debug.Log("Something went wrong?");
                 // Loss();
             }
         }
     }
+    
+    // private void OnCollisionEnter(Collision collision)
+    // {
+    //     Debug.Log("Hit: " + collision.gameObject.name);
+    //     
+    //     if (collision.gameObject.CompareTag("Building"))
+    //     {
+    //         Debug.Log("Hit building!");
+    //         
+    //         Fracture fracture = collision.gameObject.GetComponent<Fracture>();
+    //
+    //         if (hasPowerup)
+    //         {
+    //             Debug.Log("Has powerup!");
+    //             
+    //             if (fracture != null)
+    //             {
+    //                 Debug.Log("Exploding!");
+    //                 fracture.Explode();
+    //             }
+    //         }
+    //         else
+    //         {
+    //             Debug.Log("Something went wrong?");
+    //             // Loss();
+    //         }
+    //     }
+    // }
 
     // TODO: player loses => Loss screen
     // void Loss() { }

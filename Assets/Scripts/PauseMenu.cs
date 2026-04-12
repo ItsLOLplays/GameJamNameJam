@@ -2,6 +2,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public Camera gameCamera;
     public AudioMixer audioMixer;
+    public Image controlsImg;
 
     private static float volume;
 
@@ -83,6 +85,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        controlsImg.enabled = true;
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
@@ -101,6 +104,7 @@ public class PauseMenu : MonoBehaviour
 
     void Pause()
     {
+        controlsImg.enabled = false;
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;

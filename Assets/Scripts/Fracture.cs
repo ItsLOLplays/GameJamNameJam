@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Fracture : MonoBehaviour
@@ -14,6 +15,7 @@ public class Fracture : MonoBehaviour
     public AudioSource breakSound;
     public AudioSource debrisSound;
     public CarController respawn;
+    public Image checkpointImg;
 
     private bool hasExploded;
     private bool hasPlayedBreak;

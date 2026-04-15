@@ -461,6 +461,9 @@ public class CarController : MonoBehaviour
             fractures.SetActive(false);
             wheels.SetActive(true);
             body.SetActive(true);
+            
+            carEngineSound.Play();
+            tireScreechSound.mute = false;
         }
     }
 

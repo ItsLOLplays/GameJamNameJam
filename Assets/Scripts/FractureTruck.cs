@@ -37,7 +37,7 @@ public class FractureTruck : MonoBehaviour
             originalObject.SetActive(false);
             
             carController.carEngineSound.Stop();
-            carController.tireScreechSound.Stop();
+            carController.tireScreechSound.mute = true;
 
             if (fractureObject != null)
             {

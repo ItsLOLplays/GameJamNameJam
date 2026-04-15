@@ -20,12 +20,18 @@ public class Fracture : MonoBehaviour
     private bool hasExploded;
     private bool hasPlayedBreak;
     private bool hasPlayedDebris;
+    private bool hasShownImage;
 
     private void Start()
     {
         if (fractureObject != null)
         {
             fractureObject.SetActive(false);
+        }
+
+        if (checkpointImg != null)
+        {
+            checkpointImg.gameObject.SetActive(false);
         }
     }
 
@@ -37,8 +43,21 @@ public class Fracture : MonoBehaviour
         }
     }
 
+    IEnumerator ShowImage(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        checkpointImg.gameObject.SetActive(false);
+    }
+
     public void Explode()
     {
+        if (checkpointImg != null && !hasShownImage)
+        {
+            checkpointImg.gameObject.SetActive(true);
+            hasShownImage = true;
+            StartCoroutine(ShowImage(5f));
+        }
+        
         if (originalObject != null && !hasExploded)
         {
             hasExploded = true;

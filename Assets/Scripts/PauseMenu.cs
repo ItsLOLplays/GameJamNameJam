@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool isPaused = false;
+    public static bool isPaused;
     private CarControls controls;
     public GameObject pauseMenuUI;
     public Camera gameCamera;
     public AudioMixer audioMixer;
-    public Image controlsImg;
+    public GameObject gameplayUI;
 
     private static float volume;
 
@@ -85,7 +85,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        controlsImg.enabled = true;
+        gameplayUI.SetActive(true);
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
@@ -104,7 +104,7 @@ public class PauseMenu : MonoBehaviour
 
     void Pause()
     {
-        controlsImg.enabled = false;
+        gameplayUI.SetActive(false);
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;

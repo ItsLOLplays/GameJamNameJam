@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -5,7 +6,13 @@ public class PowerupController : MonoBehaviour
 {
     public bool hasPowerup;
     private Coroutine powerupRoutine;
-
+    public TimerController timerController;
+    public FractureTruck fractureTruck;
+    public GameObject winUI;
+    public GameObject loseUI;
+    
+    private bool hasWon;
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Powerup"))
@@ -16,72 +23,56 @@ public class PowerupController : MonoBehaviour
                 StopCoroutine(powerupRoutine);
             }
             
+            timerController.StartTimer(80f);
+            
             powerupRoutine = StartCoroutine(PowerupCountdownRoutine());
 
-            other.GetComponent<Collider>().enabled = false;
-            Destroy(other.gameObject); 
+            other.gameObject.SetActive(false);
         }
         
-        Debug.Log("Hit: " + other.gameObject.name);
-
-        if (other.gameObject.CompareTag("Building"))
+        if (other.gameObject.CompareTag("Ending") || other.gameObject.CompareTag("Checkpoint"))
         {
-            Debug.Log("Hit building!");
 
             Fracture fracture = other.gameObject.GetComponent<Fracture>();
 
             if (hasPowerup)
             {
-                Debug.Log("Has powerup!");
-
                 if (fracture != null)
                 {
-                    Debug.Log("Exploding!");
                     fracture.Explode();
+                }
+
+                if (other.gameObject.CompareTag("Ending"))
+                {
+                    Win();
                 }
             }
             else
             {
-                Debug.Log("Something went wrong?");
-                // Loss();
+                if (!hasWon)
+                {
+                    Lose();
+                }
             }
         }
     }
-    
-    // private void OnCollisionEnter(Collision collision)
-    // {
-    //     Debug.Log("Hit: " + collision.gameObject.name);
-    //     
-    //     if (collision.gameObject.CompareTag("Building"))
-    //     {
-    //         Debug.Log("Hit building!");
-    //         
-    //         Fracture fracture = collision.gameObject.GetComponent<Fracture>();
-    //
-    //         if (hasPowerup)
-    //         {
-    //             Debug.Log("Has powerup!");
-    //             
-    //             if (fracture != null)
-    //             {
-    //                 Debug.Log("Exploding!");
-    //                 fracture.Explode();
-    //             }
-    //         }
-    //         else
-    //         {
-    //             Debug.Log("Something went wrong?");
-    //             // Loss();
-    //         }
-    //     }
-    // }
 
-    // TODO: player loses => Loss screen
-    // void Loss() { }
+    void Lose()
+    {
+        fractureTruck.Explode();
+        loseUI.SetActive(true);
+    }
+
+    void Win()
+    {
+        Debug.Log("Win");
+        winUI.SetActive(true);
+        hasWon = true;
+    }
     
     IEnumerator PowerupCountdownRoutine()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(60);
         hasPowerup = false;
         powerupRoutine = null;
     }

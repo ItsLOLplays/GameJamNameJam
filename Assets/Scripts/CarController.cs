@@ -133,7 +133,7 @@ public class CarController : MonoBehaviour
     //[Header("Sounds")]
     [Space(10)]
     //The following variable lets you to set up sounds for your car such as the car engine or tire screech sounds.
-    public bool useSounds = false;
+    public bool useSounds;
 
     public AudioSource carEngineSound; // This variable stores the sound of the car engine.
 
@@ -141,7 +141,15 @@ public class CarController : MonoBehaviour
 
     float initialCarEngineSoundPitch; // Used to store the initial pitch of the car engine sound.
 
+    public GameObject powerup1;
+    public GameObject powerup2;
 
+    public GameObject lossScreen;
+
+    public GameObject body;
+    public GameObject wheels;
+    public GameObject fractures;
+    
     [HideInInspector] public float carSpeed; // Used to store the speed of the car.
     [HideInInspector] public bool isDrifting; // Used to know whether the car is drifting or not.
     [HideInInspector] public bool isTractionLocked; // Used to know whether the traction of the car is locked or not.
@@ -159,7 +167,7 @@ public class CarController : MonoBehaviour
     float localVelocityX;
     bool deceleratingCar;
 
-    private CarControls carControls;
+    public CarControls carControls;
     private bool isThrottlePressed;
     private bool isReversePressed;
     private bool isTurnRightPressed;
@@ -441,6 +449,15 @@ public class CarController : MonoBehaviour
             frontRight2Collider.motorTorque = 0;
             rearLeft2Collider.motorTorque = 0;
             rearRight2Collider.motorTorque = 0;
+            
+            powerup1.SetActive(true);
+            powerup2.SetActive(true);
+
+            lossScreen.SetActive(false);
+            
+            fractures.SetActive(false);
+            wheels.SetActive(true);
+            body.SetActive(true);
         }
     }
 

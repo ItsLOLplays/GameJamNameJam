@@ -72,7 +72,7 @@ public class PowerupController : MonoBehaviour
     
     IEnumerator PowerupCountdownRoutine()
     {
-        yield return new WaitForSeconds(60);
+        yield return new WaitForSeconds(80);
         hasPowerup = false;
         powerupRoutine = null;
     }

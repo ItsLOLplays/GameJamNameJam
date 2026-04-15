@@ -222,7 +222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523989309734749769, guid: 5003c9fd14649084c945874c6d44fb3d, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -376,7 +376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523989309734749769, guid: 5003c9fd14649084c945874c6d44fb3d, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -846,7 +846,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8448184880329168491, guid: a32d93a54fb92cc48b465178c228818c, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 9112519068357283025, guid: a32d93a54fb92cc48b465178c228818c, type: 3}
       propertyPath: m_LocalScale.x
@@ -960,7 +960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523989309734749769, guid: 5003c9fd14649084c945874c6d44fb3d, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2273,7 +2273,7 @@ Transform:
   m_GameObject: {fileID: 296274427}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 577.2, y: 13.6, z: 47.8}
+  m_LocalPosition: {x: 574.8, y: 13.6, z: 47.8}
   m_LocalScale: {x: 6.2732105, y: 6.2732105, z: 6.2732105}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2586,7 +2586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523989309734749769, guid: 5003c9fd14649084c945874c6d44fb3d, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4792,7 +4792,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523989309734749769, guid: 5003c9fd14649084c945874c6d44fb3d, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4902,7 +4902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523989309734749769, guid: 5003c9fd14649084c945874c6d44fb3d, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5231,7 +5231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523989309734749769, guid: 5003c9fd14649084c945874c6d44fb3d, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5692,6 +5692,7 @@ MonoBehaviour:
   explosionMaxForce: 100
   explosionForceRadius: 10
   fragScaleFactor: 1
+  camera: {fileID: 411294208}
 --- !u!4 &757562185 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2447716130491012179, guid: ee929fed0c7d76342bb37766c1391033, type: 3}
@@ -5953,7 +5954,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523989309734749769, guid: 5003c9fd14649084c945874c6d44fb3d, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6651,7 +6652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523989309734749769, guid: 5003c9fd14649084c945874c6d44fb3d, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7879,7 +7880,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2991407412868992318, guid: ea75bd0b78e83084ba045dac83662f30, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3419354148964495302, guid: ea75bd0b78e83084ba045dac83662f30, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8304,6 +8305,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 537076204}
     - target: {fileID: 6964428542060473362, guid: 1655c610334d0de4e825339710220f18, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 411294208}
+    - target: {fileID: 6964428542060473362, guid: 1655c610334d0de4e825339710220f18, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 744349257}
@@ -8559,7 +8564,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523989309734749769, guid: 5003c9fd14649084c945874c6d44fb3d, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8942,7 +8947,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523989309734749769, guid: 5003c9fd14649084c945874c6d44fb3d, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9263,7 +9268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523989309734749769, guid: 5003c9fd14649084c945874c6d44fb3d, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9536,7 +9541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2991407412868992318, guid: ea75bd0b78e83084ba045dac83662f30, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3419354148964495302, guid: ea75bd0b78e83084ba045dac83662f30, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11174,7 +11179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523989309734749769, guid: 5003c9fd14649084c945874c6d44fb3d, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12093,7 +12098,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523989309734749769, guid: 5003c9fd14649084c945874c6d44fb3d, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12285,7 +12290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523989309734749769, guid: 5003c9fd14649084c945874c6d44fb3d, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12831,7 +12836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523989309734749769, guid: 5003c9fd14649084c945874c6d44fb3d, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15922,7 +15927,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2523989309734749769, guid: 5003c9fd14649084c945874c6d44fb3d, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18907,7 +18912,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2991407412868992318, guid: ea75bd0b78e83084ba045dac83662f30, type: 3}
       propertyPath: m_TagString
-      value: DeathPlane
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3419354148964495302, guid: ea75bd0b78e83084ba045dac83662f30, type: 3}
       propertyPath: m_LocalPosition.x

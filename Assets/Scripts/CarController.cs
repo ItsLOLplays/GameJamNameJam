@@ -126,7 +126,8 @@ public class CarController : MonoBehaviour
     public GameObject player;
     public GameObject start;
     public GameObject checkpoint;
-
+    public FollowPlayer camera;
+    
     //SOUNDS
 
     [Space(20)]
@@ -418,6 +419,8 @@ public class CarController : MonoBehaviour
         
         if (carControls.Car.Reset.triggered)
         {
+            camera.UnlockCamera();
+            
             if (hasHitCheckpoint)
             {
                 player.transform.position = checkpoint.transform.position;

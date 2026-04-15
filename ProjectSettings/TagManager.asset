@@ -5,8 +5,6 @@ TagManager:
   serializedVersion: 3
   tags:
   - Powerup
-  - Building
-  - DeathPlane
   - Checkpoint
   - Ending
   layers:

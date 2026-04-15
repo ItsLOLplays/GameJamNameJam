@@ -65,7 +65,6 @@ public class PowerupController : MonoBehaviour
 
     void Win()
     {
-        Debug.Log("Win");
         winUI.SetActive(true);
         hasWon = true;
     }

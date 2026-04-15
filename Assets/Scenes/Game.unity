@@ -5651,7 +5651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c82bd56dbbc114f82ce87f62f067b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  hasPowerup: 1
+  hasPowerup: 0
   timerController: {fileID: 1333411377}
   fractureTruck: {fileID: 744349265}
   winUI: {fileID: 1363491053}
@@ -8361,7 +8361,7 @@ PrefabInstance:
       objectReference: {fileID: 196312922}
     - target: {fileID: 6964428542060473362, guid: 1655c610334d0de4e825339710220f18, type: 3}
       propertyPath: hasHitCheckpoint
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6964428542060473362, guid: 1655c610334d0de4e825339710220f18, type: 3}
       propertyPath: tireScreechSound

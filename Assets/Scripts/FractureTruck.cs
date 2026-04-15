@@ -39,7 +39,6 @@ public class FractureTruck : MonoBehaviour
             if (fractureObject != null)
             {
                 fractureObject.SetActive(true);
-                Debug.Log(fractureObject.transform.position);
                 fractureObject.transform.position = originalObject.transform.position;
 
                 foreach (Transform t in fractureObject.transform)

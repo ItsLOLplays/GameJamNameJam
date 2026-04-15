@@ -10,7 +10,6 @@ public class Respawn : MonoBehaviour
 
     private CarControls controls;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         controls = new CarControls();
@@ -21,7 +20,6 @@ public class Respawn : MonoBehaviour
         controls.Car.Enable();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (controls.Car.Reset.triggered)

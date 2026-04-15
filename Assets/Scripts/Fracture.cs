@@ -58,6 +58,8 @@ public class Fracture : MonoBehaviour
             StartCoroutine(ShowImage(5f));
         }
         
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+        
         if (originalObject != null && !hasExploded)
         {
             hasExploded = true;

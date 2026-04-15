@@ -12,6 +12,7 @@ public class FractureTruck : MonoBehaviour
     public float explosionMaxForce = 100f;
     public float explosionForceRadius = 10f;
     public float fragScaleFactor = 1f;
+    public FollowPlayer camera;
     
     private bool hasExploded;
     private bool hasPlayedBreak;
@@ -30,6 +31,8 @@ public class FractureTruck : MonoBehaviour
         {
             wheels.SetActive(false);
             hasExploded = true;
+            
+            camera.LockCamera();
             
             originalObject.SetActive(false);
             

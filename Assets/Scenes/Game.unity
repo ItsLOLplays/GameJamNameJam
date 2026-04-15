@@ -2273,7 +2273,7 @@ Transform:
   m_GameObject: {fileID: 296274427}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 577.2, y: 13.6, z: 47.8}
+  m_LocalPosition: {x: 574.8, y: 13.6, z: 47.8}
   m_LocalScale: {x: 6.2732105, y: 6.2732105, z: 6.2732105}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5651,7 +5651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c82bd56dbbc114f82ce87f62f067b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  hasPowerup: 1
+  hasPowerup: 0
   timerController: {fileID: 1333411377}
   fractureTruck: {fileID: 744349265}
   winUI: {fileID: 1363491053}
@@ -5692,6 +5692,7 @@ MonoBehaviour:
   explosionMaxForce: 100
   explosionForceRadius: 10
   fragScaleFactor: 1
+  camera: {fileID: 411294208}
 --- !u!4 &757562185 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2447716130491012179, guid: ee929fed0c7d76342bb37766c1391033, type: 3}
@@ -8304,6 +8305,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 537076204}
     - target: {fileID: 6964428542060473362, guid: 1655c610334d0de4e825339710220f18, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 411294208}
+    - target: {fileID: 6964428542060473362, guid: 1655c610334d0de4e825339710220f18, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 744349257}
@@ -8361,7 +8366,7 @@ PrefabInstance:
       objectReference: {fileID: 196312922}
     - target: {fileID: 6964428542060473362, guid: 1655c610334d0de4e825339710220f18, type: 3}
       propertyPath: hasHitCheckpoint
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6964428542060473362, guid: 1655c610334d0de4e825339710220f18, type: 3}
       propertyPath: tireScreechSound
